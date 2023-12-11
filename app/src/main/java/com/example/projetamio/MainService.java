@@ -4,12 +4,12 @@ import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
 import android.util.Log;
-import android.widget.Button;
 
 import java.util.Timer;
 import java.util.TimerTask;
 
 public class MainService extends Service {
+    Timer timer;
     public MainService() {
 
     }
@@ -21,30 +21,32 @@ public class MainService extends Service {
     }
 
     @Override
-   public void onCreate(){
+    public void onCreate() {
         super.onCreate();
-        Log.d("MainActivity","nathan : Création de l'activité");
+        Log.d("MainService", "Lucie : Création du service");
         TimerTask timerTask = new TimerTask() {
             @Override
             public void run() {
-                Log.d("TIMER","running");
+                Log.d("MainService", "Lucie : TimerTask");
             }
-
         };
-        Timer timer  = new Timer();
-        timer.scheduleAtFixedRate(timerTask,0,60000);
+
+        this.timer = new Timer();
+        this.timer.scheduleAtFixedRate(timerTask, 0, 1000);
+
 
     }
-    @Override
-    public int onStartCommand(Intent intent, int flags, int startId){
-        Log.d("MAINSERVICE" , "nathan start service ");
 
+    @Override
+    public int onStartCommand(Intent intent, int flags, int startId) {
+        Log.d("MainService", "Lucie : Démarrage du service");
         return START_STICKY;
     }
+
     @Override
-    public void onDestroy(){
+    public void onDestroy() {
         super.onDestroy();
-        Log.d("MAINSERVICE","destroyed");
-        this.stopSelf();
+        this.timer.cancel();
+        Log.d("MainService", "Lucie : Arrêt du service");
     }
 }
