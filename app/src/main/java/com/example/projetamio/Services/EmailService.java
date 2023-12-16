@@ -18,6 +18,7 @@ import androidx.annotation.Nullable;
 
 import com.example.projetamio.Models.CapteurData;
 import com.example.projetamio.Utils.JsonParser;
+import com.example.projetamio.Utils.Mail;
 
 import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
@@ -50,7 +51,10 @@ public class EmailService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId){
         Log.d("EmailService" , "nathan start service ");
-        sendEmail("cornelietutoun@gmail.com","test","test");
+        //sendEmail("cornelietutoun@gmail.com","test","test");
+        Mail mail = new Mail("nathan.cornelie@telecomnancy.net","test","hello");
+        mail.execute();
+
         return START_STICKY;
     }
 
