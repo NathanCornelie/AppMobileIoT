@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -28,9 +29,10 @@ public class SettingsActivity extends AppCompatActivity {
 
     private static final String BEGIN_WEEK_SLIDER_STATE = "bws_state";
     private static final String END_WEEK_SLIDER_STATE = "ews_state";
-
     private static final String BEGIN_WEEKEND_SLIDER_STATE = "bwes_state";
     private static final String END_WEEKEND_SLIDER_STATE = "ewes_state";
+
+    private static final String EDITTEXT_STATE = "edit_text_state";
     private static final String CHECKBOX_STATE = "checkbox_state";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +65,19 @@ public class SettingsActivity extends AppCompatActivity {
         setupSeekBarAndTextView(BEGIN_WEEKEND_SLIDER_STATE, R.id.beginweekendSeekBar, R.id.beginweekendTextView);
         setupSeekBarAndTextView(END_WEEKEND_SLIDER_STATE, R.id.endweekendSeekBar, R.id.endweekendTextView);
 
+        EditText editText = findViewById(R.id.emailEditText);
+        editText.setText(sharedPreferences.getString(EDITTEXT_STATE, ""));
+
+        editText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putString(EDITTEXT_STATE, editText.getText().toString());
+                    editor.apply();
+                }
+            }
+        });
     }
 
     private void setupSeekBarAndTextView(String sharedPreferencesKey, int seekBarId, int textViewId) {
