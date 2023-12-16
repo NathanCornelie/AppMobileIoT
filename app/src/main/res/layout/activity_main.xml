@@ -71,87 +71,172 @@
         app:layout_constraintBottom_toTopOf="@+id/EmailButton"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <Button
+    <ImageButton
         android:id="@+id/SettingsButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="42dp"
+        android:layout_height="42dp"
+        android:layout_gravity="center"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="18dp"
-        android:text="S"
+        android:layout_marginEnd="16dp"
+
+        android:background="#00FFFFFF"
+        android:src="@drawable/baseline_settings_24"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="130dp"
+        android:layout_marginBottom="24dp"
+        android:text="Capteur"
+        app:layout_constraintBottom_toTopOf="@id/infoView"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textView13"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="230dp"
+        android:layout_marginBottom="24dp"
+        android:text="Valeur"
+        app:layout_constraintBottom_toTopOf="@id/infoView"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <view
         android:id="@+id/infoView"
         class="androidx.appcompat.widget.LinearLayoutCompat"
         android:layout_width="200dp"
-        android:layout_height="200dp"
+        android:layout_height="260dp"
         android:layout_marginStart="105dp"
-        android:layout_marginTop="159dp"
+        android:layout_marginTop="160dp"
         android:layout_marginEnd="106dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/tvCapteur1"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="24dp"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="24dp"
-        android:text="TextView"
+        android:layout_marginTop="32dp"
+        android:text="..."
         app:layout_constraintStart_toStartOf="@id/infoView"
         app:layout_constraintTop_toTopOf="@id/infoView" />
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/tvValue1"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_height="24dp"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="24dp"
-        android:text="TextView"
+        android:text=""
         app:layout_constraintEnd_toEndOf="@id/infoView"
         app:layout_constraintTop_toTopOf="@id/infoView" />
 
     <TextView
-        android:id="@+id/textView6"
+        android:id="@+id/tvCapteur2"
+        android:layout_width="wrap_content"
+        android:layout_height="24dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="32dp"
+        android:text="..."
+        app:layout_constraintStart_toStartOf="@id/infoView"
+        app:layout_constraintTop_toBottomOf="@id/tvCapteur1" />
+
+    <TextView
+        android:id="@+id/tvValue2"
+        android:layout_width="wrap_content"
+        android:layout_height="24dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="24dp"
+        android:text=""
+        app:layout_constraintEnd_toEndOf="@id/infoView"
+        app:layout_constraintTop_toBottomOf="@id/tvValue1" />
+
+    <TextView
+        android:id="@+id/tvCapteur3"
+        android:layout_width="wrap_content"
+        android:layout_height="24dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="32dp"
+        android:text="..."
+        app:layout_constraintStart_toStartOf="@id/infoView"
+        app:layout_constraintTop_toBottomOf="@id/tvCapteur2" />
+
+    <TextView
+        android:id="@+id/tvValue3"
+        android:layout_width="wrap_content"
+        android:layout_height="24dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="24dp"
+        android:text=""
+        app:layout_constraintEnd_toEndOf="@id/infoView"
+        app:layout_constraintTop_toBottomOf="@id/tvValue2" />
+
+    <TextView
+        android:id="@+id/tvCapteur4"
+        android:layout_width="wrap_content"
+        android:layout_height="24dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="32dp"
+        android:text="..."
+
+        app:layout_constraintStart_toStartOf="@id/infoView"
+        app:layout_constraintTop_toBottomOf="@id/tvCapteur3" />
+
+    <TextView
+        android:id="@+id/tvValue4"
+        android:layout_width="wrap_content"
+        android:layout_height="24dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="24dp"
+        android:text=""
+        app:layout_constraintEnd_toEndOf="@id/infoView"
+        app:layout_constraintTop_toBottomOf="@id/tvValue3" />
+
+    <ImageView
+        android:id="@+id/imageView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="76dp"
-        android:text="TextView"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="186dp"
         app:layout_constraintStart_toEndOf="@+id/infoView"
-        app:layout_constraintStart_toStartOf="@id/infoView"
-        app:layout_constraintTop_toTopOf="@id/infoView" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/light_off" />
 
-    <TextView
-        android:id="@+id/textView7"
+    <ImageView
+        android:id="@+id/imageView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="76dp"
-        android:layout_marginEnd="24dp"
-        android:text="TextView"
-        app:layout_constraintEnd_toEndOf="@id/infoView"
-        app:layout_constraintTop_toTopOf="@id/infoView" />
-
-    <TextView
-        android:id="@+id/textView8"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="124dp"
-        android:text="TextView"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="36dp"
         app:layout_constraintStart_toEndOf="@+id/infoView"
-        app:layout_constraintStart_toStartOf="@id/infoView"
-        app:layout_constraintTop_toTopOf="@id/infoView" />
+        app:layout_constraintTop_toBottomOf="@id/imageView1"
+        app:srcCompat="@drawable/light_off" />
 
-    <TextView
-        android:id="@+id/textView9"
+    <ImageView
+        android:id="@+id/imageView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="124dp"
-        android:layout_marginEnd="24dp"
-        android:text="TextView"
-        app:layout_constraintEnd_toEndOf="@id/infoView"
-        app:layout_constraintTop_toTopOf="@id/infoView" />
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="36dp"
+        app:layout_constraintStart_toEndOf="@+id/infoView"
+        app:layout_constraintTop_toBottomOf="@id/imageView2"
+        app:srcCompat="@drawable/light_off" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="32dp"
+        app:layout_constraintStart_toEndOf="@+id/infoView"
+        app:layout_constraintTop_toBottomOf="@id/imageView3"
+        app:srcCompat="@drawable/light_off" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

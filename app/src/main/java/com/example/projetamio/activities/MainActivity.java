@@ -15,6 +15,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
@@ -32,11 +34,12 @@ public class MainActivity extends AppCompatActivity {
     boolean mBound = false;
     Context context = this;
      SharedPreferences sharedPreferences;
-    public TextView tv4,tv6,tv5,tv7;
+    public TextView tvCapteur1,tvCapteur2,tvCapteur3,tvCapteur4,tvValue1,tvValue2,tvValue3,tvValue4;
+    public ImageView ivCapteur1,ivCapteur2,ivCapteur3,ivCapteur4;
     private static final String SHAREDPREFS = "MyPrefs";
     private static final String TOGGLE_STATE = "toggle_state";
     private static final String CHECKBOX_STATE = "checkbox_state";
-    private Button SettingsButton;
+    private ImageButton SettingsButton;
     private ServiceConnection connection = new ServiceConnection() {
 
         @Override
@@ -55,17 +58,52 @@ public class MainActivity extends AppCompatActivity {
     private BroadcastReceiver receiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            String label1 = intent.getStringExtra("label1");
-            String value1 = intent.getStringExtra("value1");
-            String label2 = intent.getStringExtra("label2");
-            String value2 = intent.getStringExtra("value2");
-            tv4.setText(label1);
-            tv5.setText(value1);
-            tv6.setText(label2);
-            tv7.setText(value2);
+            for(int i = 0; i < 4; i++){
+                String id = intent.getStringExtra("id"+i);
+                String value = intent.getStringExtra("value"+i);
+                DisplayValue(i, id, value);
+            }
 
         }
     };
+
+    private void DisplayValue(int i, String id, String value) {
+        switch (i){
+            case 0:
+                tvCapteur1.setText(id);
+                tvValue1.setText(value);
+                if(new Double(value) > 200)
+                    ivCapteur1.setImageResource(R.drawable.light_on);
+                else
+                    ivCapteur1.setImageResource(R.drawable.light_off);
+                break;
+            case 1:
+                tvCapteur2.setText(id);
+                tvValue2.setText(value);
+                if(new Double(value) > 200)
+                    ivCapteur2.setImageResource(R.drawable.light_on);
+                else
+                    ivCapteur2.setImageResource(R.drawable.light_off);
+                break;
+            case 2:
+                tvCapteur3.setText(id);
+                tvValue3.setText(value);
+                if(new Double(value) > 200)
+                    ivCapteur3.setImageResource(R.drawable.light_on);
+                else
+                    ivCapteur3.setImageResource(R.drawable.light_off);
+                break;
+            case 3:
+                tvCapteur4.setText(id);
+                tvValue4.setText(value);
+                if(new Double(value) > 200)
+                    ivCapteur4.setImageResource(R.drawable.light_on);
+                else
+                    ivCapteur4.setImageResource(R.drawable.light_off);
+                break;
+        }
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -95,10 +133,20 @@ public class MainActivity extends AppCompatActivity {
             startService(intent);
         }
         SettingsButton = findViewById(R.id.SettingsButton);
-        tv6 = findViewById(R.id.textView6);
-        tv4 = findViewById(R.id.textView4);
-        tv5 = findViewById(R.id.textView5);
-        tv7 = findViewById(R.id.textView7);
+        tvCapteur2 = findViewById(R.id.tvCapteur2);
+        tvCapteur1 = findViewById(R.id.tvCapteur1);
+        tvCapteur3 = findViewById(R.id.tvCapteur3);
+        tvCapteur4 = findViewById(R.id.tvCapteur4);
+        tvValue1 = findViewById(R.id.tvValue1);
+        tvValue2 = findViewById(R.id.tvValue2);
+        tvValue3 = findViewById(R.id.tvValue3);
+        tvValue4 = findViewById(R.id.tvValue4);
+        ivCapteur1 = findViewById(R.id.imageView1);
+        ivCapteur2 = findViewById(R.id.imageView2);
+        ivCapteur3 = findViewById(R.id.imageView3);
+        ivCapteur4 = findViewById(R.id.imageView4);
+
+
 
 
         SettingsButton.setOnClickListener(new View.OnClickListener() {

@@ -32,11 +32,12 @@ public class GetDataTask extends AsyncTask<Void, Void, List<Data>> {
                     Log.d("MainActivity", "Lucie : data_list size = " + dataList.size());
 
                     Intent intent = new Intent("data");
-                    intent.putExtra("label1", dataList.get(0).getLabel());
-                    intent.putExtra("value1", dataList.get(0).getValue().toString());
-                    intent.putExtra("label2", dataList.get(1).getLabel());
-                    intent.putExtra("value2", dataList.get(1).getValue().toString());
-                    mService.sendBroadcast(intent);
+                    for(int i = 0; i < dataList.size(); i++){
+                        intent.putExtra("id"+i, dataList.get(i).getMote());
+                        intent.putExtra("value"+i, dataList.get(i).getValue().toString());
+                    }
+                    context.sendBroadcast(intent);
+                    //mService.sendBroadcast(intent);
 
                     List<String> highValueDataNames = new ArrayList<>();
 
