@@ -1,14 +1,11 @@
-package com.example.projetamio;
+package com.example.projetamio.Utils;
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.JsonReader;
 import android.util.Log;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+import com.example.projetamio.Models.Data;
 
 import java.io.BufferedInputStream;
 import java.io.IOException;
@@ -20,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class APIHandler {
 
@@ -37,7 +35,8 @@ public class APIHandler {
         this.apiUrl = apiUrl;
     }
 
-    public void fetchData(DataCallback callback) {
+    public List<Data> fetchData(DataCallback callback) {
+        AtomicReference<List<Data>> resp = new AtomicReference<>(new ArrayList<>());
         try {
             URL url = new URL(apiUrl);
 
@@ -46,7 +45,7 @@ public class APIHandler {
 
             executorService.execute(() -> {
                 try {
-                    fetchDataFromUrl(url, handler, callback);
+                   resp.set(fetchDataFromUrl(url, handler, callback));
                 } catch (Exception e) {
                     throw new RuntimeException(e);
                 }
@@ -54,9 +53,10 @@ public class APIHandler {
         } catch (Exception e) {
             Log.w("APIHandler", "Bad URL", e);
         }
+        return resp.get();
     }
-
-    private void fetchDataFromUrl(URL url, Handler handler, DataCallback callback) throws IOException {
+    public List<Data> data = new ArrayList<>();
+    private List<Data> fetchDataFromUrl(URL url, Handler handler, DataCallback callback) throws IOException {
         try {
             HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
             urlConnection.setRequestMethod("GET");
@@ -67,6 +67,7 @@ public class APIHandler {
 
             if (responseCode == 200) {
                 List<Data> dataList = parseData(in);
+                data = dataList;
                 handler.post(() -> {
                     callback.onDataLoaded(dataList);
                 });
@@ -76,6 +77,7 @@ public class APIHandler {
         } catch (IOException e) {
             handler.post(() -> callback.onError(e.getMessage()));
         }
+        return data;
     }
 
 

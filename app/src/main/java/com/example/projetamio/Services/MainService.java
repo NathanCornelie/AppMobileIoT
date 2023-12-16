@@ -1,10 +1,15 @@
-package com.example.projetamio;
+package com.example.projetamio.Services;
 
 import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
 import android.util.Log;
 
+import java.io.BufferedInputStream;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URI;
+import java.net.URL;
 import java.util.Timer;
 import java.util.TimerTask;
 

@@ -1,17 +1,18 @@
-package com.example.projetamio;
+package com.example.projetamio.Services;
 
-import android.app.Notification;
-import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.Build;
 import android.os.IBinder;
 import android.util.Log;
 
 import androidx.core.app.NotificationCompat;
+
+import com.example.projetamio.Utils.DataCallback;
+import com.example.projetamio.R;
+import com.example.projetamio.Models.Data;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -28,7 +29,7 @@ public class MonitoringService extends Service {
 
 
     Timer timer;
-    APIService apiService;
+    com.example.projetamio.Services.APIService apiService;
     Context applicationContext;
     public MonitoringService() {
 
@@ -44,23 +45,24 @@ public class MonitoringService extends Service {
     public void onCreate() {
         super.onCreate();
 
-        Log.d("MonitoringService", "Lucie : Création du service");
+        Log.d("MonitoringService", " : Création du service");
         // Create an instance of APIService
         applicationContext = getApplicationContext();
 
         // Appelez APIService en passant le contexte
-        APIService apiService = new APIService();
+        com.example.projetamio.Services.APIService apiService = new APIService();
         TimerTask timerTask = new TimerTask() {
             @Override
             public void run() {
-                Log.d("MonitoringService", "Lucie : TimerTask");
+                Log.d("MonitoringService", " : TimerTask");
+
                 // Call the getData method of APIService every minute
                 apiService.getData(new DataCallback() {
                     @Override
                     public void onDataLoaded(List<Data> dataList) {
                         // Handle loaded data
                         // You can perform any actions here based on the loaded data
-                        Log.d("MonitoringService", "Lucie : Données chargées");
+
                         for (Data data : dataList) {
                             updateJsonData(dataList);
                             //check here if the light turn on
@@ -72,6 +74,14 @@ public class MonitoringService extends Service {
 
                             double lastValue = latestData.getValue();
                             double secondLastValue = findSecondLatestData(currentDataList, data.getLabel()).getValue();
+                            if(lastValue != secondLastValue){
+                                Intent intent2 = new Intent("data");
+                                intent2.putExtra("label1", "light1");
+                                intent2.putExtra("value1", ((Double)lastValue).toString());
+                                intent2.putExtra("label2", "light1");
+                                intent2.putExtra("value2", ((Double)secondLastValue).toString());
+                                sendBroadcast(intent2);
+                            }
                             Log.d("MonitoringService", "Lucie : lastValue = " + lastValue);
                             Log.d("MonitoringService", "Lucie : secondLastValue = " + secondLastValue);
                             if(lastValue > 200 && secondLastValue < 200){

@@ -1,0 +1,32 @@
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+<!--
+    <PreferenceCategory app:title="Settings">
+
+        <EditTextPreference
+            app:key="signature"
+            app:title="@string/signature_title"
+            app:useSimpleSummaryProvider="true" />
+
+        <ListPreference
+            app:defaultValue="reply"
+            app:entries="@array/reply_entries"
+            app:entryValues="@array/reply_values"
+            app:key="reply"
+            app:title="@string/reply_title"
+            app:useSimpleSummaryProvider="true" />
+
+    </PreferenceCategory>-->
+
+    <PreferenceCategory app:title="Settings">
+
+        <SwitchPreferenceCompat
+            app:key="toggle_state"
+            app:title="Start on boot"
+            android:id="@+id/toggle_startOnBoot" />
+            />
+
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

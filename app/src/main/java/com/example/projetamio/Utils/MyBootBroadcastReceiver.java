@@ -1,9 +1,12 @@
-package com.example.projetamio;
+package com.example.projetamio.Utils;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
+
+import com.example.projetamio.Services.MainService;
+import com.example.projetamio.Services.MonitoringService;
 
 public class MyBootBroadcastReceiver extends BroadcastReceiver {
     @Override
