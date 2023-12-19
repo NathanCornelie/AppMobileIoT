@@ -8,7 +8,7 @@ L'application AMIO permet à l'utilisateur de détecter si une lumière est allu
 Lucie BOUCHER et Nathan CORNELIE
 
 ## Organisation des fichiers
-Vous pouvez trouver le fichier APK dans le répertoire X/.
+Vous pouvez trouver le fichier APK dans le répertoire app/app-debug.apk.
 
 Le code est situé dans le répertoire app/src/main/.
 
@@ -26,3 +26,4 @@ Toutes les fonctionnalités requises ont été implémentées :
 1. Téléchargez le fichier APK et installez l'application sur votre smartphone Android.
 
 2. Pour que l'application puisse interroger correctement l'IOT LAB, configurez préalablement le VPN de l'Université de Lorraine sur votre smartphone Android.
+ 
