@@ -1,32 +1,97 @@
-<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android">
-<!--
-    <PreferenceCategory app:title="Settings">
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <!--
+        <PreferenceCategory app:title="Settings">
 
-        <EditTextPreference
-            app:key="signature"
-            app:title="@string/signature_title"
-            app:useSimpleSummaryProvider="true" />
+            <EditTextPreference
+                app:key="signature"
+                app:title="@string/signature_title"
+                app:useSimpleSummaryProvider="true" />
 
-        <ListPreference
-            app:defaultValue="reply"
-            app:entries="@array/reply_entries"
-            app:entryValues="@array/reply_values"
-            app:key="reply"
-            app:title="@string/reply_title"
-            app:useSimpleSummaryProvider="true" />
+            <ListPreference
+                app:defaultValue="reply"
+                app:entries="@array/reply_entries"
+                app:entryValues="@array/reply_values"
+                app:key="reply"
+                app:title="@string/reply_title"
+                app:useSimpleSummaryProvider="true" />
 
-    </PreferenceCategory>-->
+        </PreferenceCategory>-->
 
     <PreferenceCategory app:title="Settings">
 
         <SwitchPreferenceCompat
+            android:id="@+id/toggle_startOnBoot"
             app:key="toggle_state"
-            app:title="Start on boot"
-            android:id="@+id/toggle_startOnBoot" />
+            app:title="Start on boot" />
+        />
+
+
+    </PreferenceCategory>
+    <PreferenceCategory app:title="Mail">
+        <SwitchPreferenceCompat
+            android:id="@+id/toggle_sendMail"
+            android:key="toggle_sendMail"
+            app:title="Send mail"
+            android:defaultValue="true"
+            android:summary="Envoie automatique des mails "
             />
 
+        <EditTextPreference
+            app:defaultValue=""
+            app:dialogMessage="Enter email to send data to"
+            app:dialogTitle="Email"
+            android:key="email"
+            app:summary="Email to send data to"
+            app:title="Email" />
+        <SeekBarPreference
 
+            android:id="@+id/beginweekSeekBar"
+            android:key="beginweekSeekBar"
+            android:max="24"
+            android:min="0"
+            android:title="Début en Semaine"
+            app:defaultValue="19"
+            app:dialogMessage="Start of week"
+            app:dialogTitle="Start of week"
+            app:showSeekBarValue="true"
+            app:useSimpleSummaryProvider="true" />
+        <SeekBarPreference
+
+            android:id="@+id/endweekSeekBar"
+            android:key="endweekSeekBar"
+            android:max="24"
+            android:min="0"
+            android:title="Fin en Semaine"
+            app:defaultValue="23"
+            app:dialogMessage="End of week"
+            app:dialogTitle="End of week"
+            app:showSeekBarValue="true"
+            app:useSimpleSummaryProvider="true" />
+        <SeekBarPreference
+
+            android:id="@+id/beginweekendSeekBar"
+            android:key="beginweekendSeekBar"
+            android:max="24"
+            android:min="0"
+            android:title="Début en Week-end"
+            app:defaultValue="23"
+            app:dialogMessage="Start of week-end"
+            app:dialogTitle="Start of week-end"
+            app:showSeekBarValue="true"
+            app:useSimpleSummaryProvider="true" />
+        <SeekBarPreference
+
+            android:id="@+id/endweekendSeekBar"
+            android:key="endweekendSeekBar"
+            android:max="24"
+            android:min="0"
+            android:title="Fin en Week-end"
+            app:defaultValue="6"
+            app:dialogMessage="End of week-end"
+            app:dialogTitle="End of week-end"
+            app:showSeekBarValue="true"
+            app:useSimpleSummaryProvider="true" />
     </PreferenceCategory>
 
 </PreferenceScreen>

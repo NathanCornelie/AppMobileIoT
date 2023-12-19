@@ -39,7 +39,7 @@ public class Notification {
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT);
 
         // Envoi de la notification
-        Log.d("MonitoringService", "Lucie : Envoi de la notification");
+        Log.d("MonitoringService", " Envoi de la notification");
         NotificationManager notificationManager = context.getSystemService(NotificationManager.class);
         notificationManager.notify(1, builder.build());
     }

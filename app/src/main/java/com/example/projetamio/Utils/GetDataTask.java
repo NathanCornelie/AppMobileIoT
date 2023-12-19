@@ -2,6 +2,7 @@ package com.example.projetamio.Utils;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;
@@ -29,15 +30,9 @@ public class GetDataTask extends AsyncTask<Void, Void, List<Data>> {
                 public void onDataLoaded(List<Data> dataList) {
                     // Le reste du code à exécuter après la récupération des données
 
-                    Log.d("MainActivity", "Lucie : data_list size = " + dataList.size());
+                    Log.d("MainActivity", " : data_list size = " + dataList.size());
 
-                    Intent intent = new Intent("data");
-                    for(int i = 0; i < dataList.size(); i++){
-                        intent.putExtra("id"+i, dataList.get(i).getMote());
-                        intent.putExtra("value"+i, dataList.get(i).getValue().toString());
-                    }
-                    context.sendBroadcast(intent);
-                    //mService.sendBroadcast(intent);
+                    sendDataToActivity(dataList);
 
                     List<String> highValueDataNames = new ArrayList<>();
 
@@ -47,7 +42,7 @@ public class GetDataTask extends AsyncTask<Void, Void, List<Data>> {
                             tmp.setTime(data.getTimestamp());
                         }
 
-                        Log.d("MainActivity", "Lucie : " + data.getLabel()+ " " + data.getValue() + " " );
+                        Log.d("MainActivity", ": " + data.getLabel()+ " " + data.getValue() + " " );
                         if (data.getValue() > 200) {
                             //list of every mote that are on (value >  220)
                             highValueDataNames.add(data.getMote());
@@ -60,16 +55,13 @@ public class GetDataTask extends AsyncTask<Void, Void, List<Data>> {
                         resultStringBuilder.append(name).append("\n");
                     }
 
-                    // Afficher la chaîne dans un TextView (remplacez R.id.textView avec l'ID réel de votre TextView)
-                    /*TextView resultTextView = findViewById(R.id.tv6);
-                    resultTextView.setText(resultStringBuilder.toString());*/
+
                 }
 
                 @Override
                 public void onError(String errorMessage) {
                     // Gérer l'erreur ici
-                    Log.e("MainActivity", "Lucie : " + errorMessage);
-                    Toast.makeText(context, errorMessage, Toast.LENGTH_LONG).show();
+                    Log.e("MainActivity", ": " + errorMessage);
 
                 }
             });
@@ -80,7 +72,21 @@ public class GetDataTask extends AsyncTask<Void, Void, List<Data>> {
         }
         return null;
     }
+    private void sendDataToActivity(List<Data> dataList) {
+        Intent intent = new Intent(DataBroadcastReceiver.ACTION_DATA_UPDATED);
 
+        for(int i = 0; i < dataList.size(); i++){
+            intent.putExtra("id"+i, dataList.get(i).getMote());
+            intent.putExtra("value"+i, dataList.get(i).getValue().toString());
+        }
+        SharedPreferences sharedPreferences = context.getSharedPreferences("MyPref", Context.MODE_PRIVATE);
+        String to = sharedPreferences.getString("email_sendto", "default");
+
+        Log.e("TAG", "sendDataToActivity: " + to );
+        Mail mail = new Mail("nathan.cornelie@telecomnancy.net", "tu connais","yooooo" );
+        mail.execute();
+        context.sendBroadcast(intent);
+    }
     @Override
     protected void onPostExecute(List<Data> data_list) {
         // Peut être vide, car le traitement est effectué dans le callback

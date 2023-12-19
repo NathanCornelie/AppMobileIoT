@@ -5,13 +5,7 @@ import android.content.Intent;
 import android.os.IBinder;
 import android.util.Log;
 
-import java.io.BufferedInputStream;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URI;
-import java.net.URL;
 import java.util.Timer;
-import java.util.TimerTask;
 
 public class MainService extends Service {
     Timer timer;
@@ -28,23 +22,13 @@ public class MainService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
-        Log.d("MainService", "Lucie : Création du service");
-        TimerTask timerTask = new TimerTask() {
-            @Override
-            public void run() {
-                Log.d("MainService", "Lucie : TimerTask");
-            }
-        };
-
-        this.timer = new Timer();
-        this.timer.scheduleAtFixedRate(timerTask, 0, 1000);
-
+        Log.d("MainService", " Création du service");
 
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        Log.d("MainService", "Lucie : Démarrage du service");
+        Log.d("MainService", "Démarrage du service");
         return START_STICKY;
     }
 
@@ -52,6 +36,6 @@ public class MainService extends Service {
     public void onDestroy() {
         super.onDestroy();
         this.timer.cancel();
-        Log.d("MainService", "Lucie : Arrêt du service");
+        Log.d("MainService", " Arrêt du service");
     }
 }

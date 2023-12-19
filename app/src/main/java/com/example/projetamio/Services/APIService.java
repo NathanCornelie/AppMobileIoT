@@ -1,6 +1,7 @@
 package com.example.projetamio.Services;
 
 import android.app.Service;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Binder;
@@ -23,6 +24,7 @@ public class APIService extends Service {
     private String apiUrl = "http://iotlab.telecomnancy.eu:8080/iotlab/rest/data/1/light1/last/";
     private Context context;
     private String TAG = "API SERVICE";
+    private BroadcastReceiver broadcastReceiver;
 
     @Override
     public IBinder onBind(Intent intent) {
@@ -31,7 +33,11 @@ public class APIService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        new GetDataTask(this, context).execute();
+        if (intent != null && intent.hasExtra("context"))
+            applicationContext = (Context) intent.getParcelableExtra("context");
+        new GetDataTask(this, applicationContext).execute();
+        this.onDestroy();
+        Log.e(TAG, "onStartCommand: Service started");
         return START_STICKY;
     }
 
@@ -40,7 +46,8 @@ public class APIService extends Service {
         super.onCreate();
         this.context = this;
         applicationContext = getApplicationContext();
-        Log.d(TAG, "Lucie : APIService created");
+        Log.d(TAG, " APIService created");
+
     }
 
     public void getData(DataCallback callback) {
@@ -63,7 +70,7 @@ public class APIService extends Service {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        Log.d(TAG, "Lucie : destroyed");
+        Log.d(TAG, " destroyed");
         this.stopSelf();
     }
 

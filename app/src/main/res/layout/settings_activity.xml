@@ -2,16 +2,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    >
 
-    <TextView
-        android:id="@+id/settingsTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="176dp"
-        android:text="SETTINGS"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <FrameLayout
         android:id="@+id/settings"
@@ -23,74 +16,5 @@
 
     </FrameLayout>
 
-    <LinearLayout
-        android:id="@+id/settings2"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="240dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:orientation="vertical">
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Start of week"
-            android:textAlignment="center"
-            android:id="@+id/beginweekTextView"/>
-        <SeekBar
-            android:id="@+id/beginweekSeekBar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:max="24"
-            android:progress="1"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="End of week"
-            android:textAlignment="center"
-            android:id="@+id/endweekTextView"/>/>
-        <SeekBar
-            android:id="@+id/endweekSeekBar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:max="24"
-            android:progress="1"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Start of week-end"
-            android:textAlignment="center"
-            android:id="@+id/beginweekendTextView"/>
-        <SeekBar
-            android:id="@+id/beginweekendSeekBar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:max="24"
-            android:progress="1"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="End of week-end"
-            android:textAlignment="center"
-            android:id="@+id/endweekendTextView"/>
-        <SeekBar
-            android:id="@+id/endweekendSeekBar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:max="24"
-            android:progress="1"/>
-        <EditText
-            android:id="@+id/emailEditText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Enter your e-mail"
-            android:inputType="textEmailAddress"
-            android:text=""
-            />
 
-    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
