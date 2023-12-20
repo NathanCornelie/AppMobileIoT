@@ -22,6 +22,7 @@ import com.example.projetamio.R;
 import com.example.projetamio.Services.APIService;
 import com.example.projetamio.Services.MonitoringService;
 import com.example.projetamio.Utils.DataBroadcastReceiver;
+import com.example.projetamio.Utils.MyBootBroadcastReceiver;
 import com.example.projetamio.Utils.MyDataUpdateListener;
 import com.example.projetamio.Utils.Notification;
 
@@ -43,7 +44,8 @@ public class MainActivity extends AppCompatActivity implements MyDataUpdateListe
     SharedPreferences sharedPreferences;
     private ImageButton MonitoringButton;
     private boolean MonitoringButtonState = false;
-    private DataBroadcastReceiver receiver;
+    private DataBroadcastReceiver dataBroadcastReceiver;
+    private MyBootBroadcastReceiver myBootBroadcastReceiver;
     private ImageButton SettingsButton;
     private ServiceConnection connection = new ServiceConnection() {
 
@@ -78,40 +80,43 @@ public class MainActivity extends AppCompatActivity implements MyDataUpdateListe
 
 
     private void DisplayValue(int i, String id, String value) {
-        switch (i) {
-            case 0:
-                tvCapteur1.setText(id);
-                tvValue1.setText(value);
-                if (new Double(value) > 200)
-                    ivCapteur1.setImageResource(R.drawable.light_on);
-                else
-                    ivCapteur1.setImageResource(R.drawable.light_off);
-                break;
-            case 1:
-                tvCapteur2.setText(id);
-                tvValue2.setText(value);
-                if (Double.parseDouble(value) > 200)
-                    ivCapteur2.setImageResource(R.drawable.light_on);
-                else
-                    ivCapteur2.setImageResource(R.drawable.light_off);
-                break;
-            case 2:
-                tvCapteur3.setText(id);
-                tvValue3.setText(value);
-                if ( Double.parseDouble(value) > 200)
-                    ivCapteur3.setImageResource(R.drawable.light_on);
-                else
-                    ivCapteur3.setImageResource(R.drawable.light_off);
-                break;
-            case 3:
-                tvCapteur4.setText(id);
-                tvValue4.setText(value);
-                if (Double.parseDouble(value) > 200)
-                    ivCapteur4.setImageResource(R.drawable.light_on);
-                else
-                    ivCapteur4.setImageResource(R.drawable.light_off);
-                break;
+        if(value != null){
+            switch (i) {
+                case 0:
+                    tvCapteur1.setText(id);
+                    tvValue1.setText(value);
+                    if (new Double(value) > 200)
+                        ivCapteur1.setImageResource(R.drawable.light_on);
+                    else
+                        ivCapteur1.setImageResource(R.drawable.light_off);
+                    break;
+                case 1:
+                    tvCapteur2.setText(id);
+                    tvValue2.setText(value);
+                    if (new Double(value) > 200)
+                        ivCapteur2.setImageResource(R.drawable.light_on);
+                    else
+                        ivCapteur2.setImageResource(R.drawable.light_off);
+                    break;
+                case 2:
+                    tvCapteur3.setText(id);
+                    tvValue3.setText(value);
+                    if (new Double(value) > 200)
+                        ivCapteur3.setImageResource(R.drawable.light_on);
+                    else
+                        ivCapteur3.setImageResource(R.drawable.light_off);
+                    break;
+                case 3:
+                    tvCapteur4.setText(id);
+                    tvValue4.setText(value);
+                    if (new Double(value) > 200)
+                        ivCapteur4.setImageResource(R.drawable.light_on);
+                    else
+                        ivCapteur4.setImageResource(R.drawable.light_off);
+                    break;
+            }
         }
+
     }
 
     @Override
@@ -156,9 +161,11 @@ public class MainActivity extends AppCompatActivity implements MyDataUpdateListe
                 startActivity(intent);
             }
         });
-        receiver = new DataBroadcastReceiver(this);
+        dataBroadcastReceiver = new DataBroadcastReceiver(this);
         IntentFilter intentFilter = new IntentFilter(DataBroadcastReceiver.ACTION_DATA_UPDATED);
-        registerReceiver(receiver, intentFilter);
+        registerReceiver(dataBroadcastReceiver, intentFilter);
+
+        myBootBroadcastReceiver = new MyBootBroadcastReceiver();
 
 
         sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
@@ -206,7 +213,7 @@ public class MainActivity extends AppCompatActivity implements MyDataUpdateListe
 
     @Override
     protected void onDestroy() {
-        unregisterReceiver(receiver);
+        unregisterReceiver(dataBroadcastReceiver);
         super.onDestroy();
 
     }

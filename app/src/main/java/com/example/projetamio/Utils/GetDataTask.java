@@ -83,8 +83,6 @@ public class GetDataTask extends AsyncTask<Void, Void, List<Data>> {
         String to = sharedPreferences.getString("email_sendto", "default");
 
         Log.e("TAG", "sendDataToActivity: " + to );
-        Mail mail = new Mail("nathan.cornelie@telecomnancy.net", "tu connais","yooooo" );
-        mail.execute();
         context.sendBroadcast(intent);
     }
     @Override
